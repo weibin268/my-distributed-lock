@@ -9,8 +9,8 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.github.weibin268</groupId>
-	<artifactId>my-distributed-distributedLock</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>my-distributed-lock</artifactId>
+	<version>1.0.0</version>
 	<name>my-distributed-distributedLock</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -44,14 +44,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 
 </project>
