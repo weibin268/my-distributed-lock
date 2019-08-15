@@ -76,7 +76,7 @@ public class LuaDistributedLock implements Lock, InitializingBean {
                 return key;
             } else {
                 try {
-                    Thread.sleep(10, (int) (Math.random() * 500));
+                    Thread.sleep(lockProperties.getRetryInterval());
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
