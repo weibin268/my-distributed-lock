@@ -20,9 +20,7 @@ import org.springframework.stereotype.Component;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
-/** 针对加了@Lock的函数进行分布式锁的增强处理
- * Created by alex on 18/12/24.
- */
+
 @Component
 @Aspect
 public class DistributedLockAspect {

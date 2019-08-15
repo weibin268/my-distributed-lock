@@ -2,9 +2,7 @@ package com.zhuang.distributedlock.annotation;
 
 import java.lang.annotation.*;
 
-/**
- * Created by alex on 18/12/24.
- */
+
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
 @Inherited

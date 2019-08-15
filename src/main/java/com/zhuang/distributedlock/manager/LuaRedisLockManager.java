@@ -6,11 +6,13 @@ import com.zhuang.distributedlock.properties.LockProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
 
 @Component
+@EnableConfigurationProperties(LockProperties.class)
 public class LuaRedisLockManager implements LockManager {
 
     private Logger logger = LoggerFactory.getLogger(LuaRedisLockManager.class);
