@@ -2,7 +2,7 @@ package com.zhuang.distributedlock.manager;
 
 
 import com.zhuang.distributedlock.lock.Lock;
-import com.zhuang.distributedlock.properties.LockProperties;
+import com.zhuang.distributedlock.config.LockProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

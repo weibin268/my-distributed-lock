@@ -2,7 +2,7 @@ package com.zhuang.distributedlock.lock;
 
 
 import com.zhuang.distributedlock.manager.LuaRedisLockManager;
-import com.zhuang.distributedlock.properties.LockProperties;
+import com.zhuang.distributedlock.config.LockProperties;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

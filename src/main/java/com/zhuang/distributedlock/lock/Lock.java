@@ -1,7 +1,7 @@
 package com.zhuang.distributedlock.lock;
 
 
-import com.zhuang.distributedlock.properties.LockProperties;
+import com.zhuang.distributedlock.config.LockProperties;
 
 public interface Lock {
 

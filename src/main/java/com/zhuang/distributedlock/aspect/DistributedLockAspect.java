@@ -4,7 +4,7 @@ package com.zhuang.distributedlock.aspect;
 import com.zhuang.distributedlock.annotation.DistributedLock;
 import com.zhuang.distributedlock.annotation.LockKey;
 import com.zhuang.distributedlock.lock.Lock;
-import com.zhuang.distributedlock.properties.LockProperties;
+import com.zhuang.distributedlock.config.LockProperties;
 import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
