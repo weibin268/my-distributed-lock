@@ -3,7 +3,6 @@ package com.zhuang.distributedlock.lock;
 
 import com.zhuang.distributedlock.manager.LuaRedisLockManager;
 import com.zhuang.distributedlock.config.LockProperties;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -14,6 +13,7 @@ import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.scripting.support.ResourceScriptSource;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +102,7 @@ public class LuaDistributedLock implements Lock, InitializingBean {
      * @return
      */
     private String getLockKey(String lock, LockProperties lockProperties) {
-        if (StringUtils.isBlank(lockProperties.getLockPre())) {
+        if (StringUtils.isEmpty(lockProperties.getLockPre())) {
             return lock;
         }
         StringBuilder sb = new StringBuilder();

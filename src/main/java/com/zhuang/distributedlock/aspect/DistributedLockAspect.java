@@ -5,7 +5,6 @@ import com.zhuang.distributedlock.annotation.DistributedLock;
 import com.zhuang.distributedlock.annotation.LockKey;
 import com.zhuang.distributedlock.lock.Lock;
 import com.zhuang.distributedlock.config.LockProperties;
-import org.apache.commons.lang.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,6 +16,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -45,7 +45,7 @@ public class DistributedLockAspect {
         BeanUtils.copyProperties(lockProperties, lockProp);
         Method method = ((MethodSignature) proceedingJoinPoint.getSignature()).getMethod();
         DistributedLock distributedLock = method.getAnnotation(DistributedLock.class);
-        if (StringUtils.isNotBlank(distributedLock.lockPre())) {
+        if (!StringUtils.isEmpty(distributedLock.lockPre())) {
             lockProp.setLockPre(distributedLock.lockPre());
         }
         if (distributedLock.retryCount() > 0) {
@@ -57,7 +57,7 @@ public class DistributedLockAspect {
         String key = distributedLock.key();
         //若存在@LockKey的入参，则将其设置为分布式锁的KEY
         String paramKey = paramToKey(method, proceedingJoinPoint.getArgs());
-        if (StringUtils.isNotBlank(paramKey)) {
+        if (!StringUtils.isEmpty(paramKey)) {
             key = key + paramKey;
         }
         //分布式锁没有key，则取其类名+方法名
