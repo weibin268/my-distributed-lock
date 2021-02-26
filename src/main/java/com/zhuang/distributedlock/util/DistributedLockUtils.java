@@ -1,5 +1,7 @@
 package com.zhuang.distributedlock.util;
 
+import com.zhuang.distributedlock.config.LockProperties;
+import com.zhuang.distributedlock.lock.Lock;
 import com.zhuang.distributedlock.manager.LockCallBack;
 import com.zhuang.distributedlock.manager.LockManager;
 import com.zhuang.distributedlock.manager.ReturnCallBack;
@@ -18,6 +20,8 @@ public class DistributedLockUtils {
 
     @Autowired
     private LockManager lockManager;
+    @Autowired
+    private Lock lock;
 
     @PostConstruct
     public void init() {
@@ -30,5 +34,15 @@ public class DistributedLockUtils {
 
     public static <T> T callBack(String lockKey, ReturnCallBack<T> callBack) {
         return _this.lockManager.callBack(lockKey, callBack);
+    }
+
+    public String lock(String lockKey, long expiredTime) {
+        LockProperties lockConfig = new LockProperties();
+        lockConfig.setExpiredTime(expiredTime);
+        return lock(lockKey, lockConfig);
+    }
+
+    public String lock(String lockKey, LockProperties lockConfig) {
+        return _this.lock.lock(lockKey, lockConfig);
     }
 }
