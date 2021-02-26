@@ -11,7 +11,7 @@
 
 	<groupId>com.github.weibin268</groupId>
 	<artifactId>my-distributed-lock</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>my-distributed-lock</name>
 	<description>my-distributed-lock</description>
 	<url>https://github.com/weibin268/my-distributed-lock</url>

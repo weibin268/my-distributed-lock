@@ -70,7 +70,7 @@ public class LuaDistributedLock implements Lock, InitializingBean {
             if (lockTryCount > 0) {
                 logger.debug("重试获取锁:{}操作:{}次", key, lockTryCount);
             }
-            if (redisTemplate.execute(lockScript, keyList, String.valueOf(lockProperties.getExpiredTime() * 1000)) > 0) {
+            if (redisTemplate.execute(lockScript, keyList, String.valueOf(lockProperties.getExpiredTime())) > 0) {
                 //返回结果大于0，表示加锁成功
                 logger.debug("加锁成功，lockKey:{},准备执行业务操作", key);
                 return key;

@@ -14,6 +14,6 @@ public @interface DistributedLock {
 
     int retryCount() default 0;//重试次数
 
-    int expiredTime() default 0;//持锁时间 单位：s
+    long expiredTime() default 0;//持锁时间 单位：毫秒
 
 }

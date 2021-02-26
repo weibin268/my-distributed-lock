@@ -9,15 +9,15 @@ import org.springframework.context.annotation.Configuration;
 public class LockProperties {
 
     private String lockPre = "lock";//锁key的前缀
-    private int expiredTime = 60;// 加锁操作持有锁的最大时间（单位：秒）
+    private long expiredTime = 60000;// 加锁操作持有锁的最大时间（单位：毫秒）
     private int retryCount = 100;//获取锁的重试次数
     private long retryInterval = 300;//获取锁的重试间隔时间（单位：毫秒）
 
-    public int getExpiredTime() {
+    public long getExpiredTime() {
         return expiredTime;
     }
 
-    public void setExpiredTime(int expiredTime) {
+    public void setExpiredTime(long expiredTime) {
         this.expiredTime = expiredTime;
     }
 
