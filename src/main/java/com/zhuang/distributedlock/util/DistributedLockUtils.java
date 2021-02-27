@@ -36,6 +36,12 @@ public class DistributedLockUtils {
         return _this.lockManager.callBack(lockKey, callBack);
     }
 
+    /**
+     *
+     * @param lockKey   锁的key
+     * @param expiredTime 锁的过去时间，单位：毫秒
+     * @return
+     */
     public String lock(String lockKey, long expiredTime) {
         LockProperties lockConfig = new LockProperties();
         lockConfig.setExpiredTime(expiredTime);
