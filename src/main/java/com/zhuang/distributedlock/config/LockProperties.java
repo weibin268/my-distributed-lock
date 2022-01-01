@@ -18,7 +18,7 @@ public class LockProperties {
     public static final String LOCK_TYPE_DATABASE = "database";
     private String lockType = LOCK_TYPE_REDIS;//锁类型
     private String lockPre = "my-distributed-lock";//锁key的前缀
-    private long expiredTime = 60000;// 锁的过期时间（单位：毫秒）
+    private long expiredTime = 60000;// 锁的过期时间（单位：毫秒，作用：防止死锁）
     private long acquireTimeout = 60000;// 获取锁的超时时间（单位：毫秒）
     private int retryCount = 100;//获取锁的重试次数
     private long retryInterval = 300;//获取锁的重试间隔时间（单位：毫秒）
