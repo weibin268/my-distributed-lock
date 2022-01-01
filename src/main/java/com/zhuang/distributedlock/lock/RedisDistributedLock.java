@@ -81,6 +81,7 @@ public class RedisDistributedLock implements Lock<String>, InitializingBean {
     }
 
     public boolean unlock(String lock, LockProperties lockProperties) {
+        Assert.notNull(lock, "lock can't be null");
         final String key = getLockKey(lock, lockProperties);
         List<String> keyList = new ArrayList<String>();
         keyList.add(key);

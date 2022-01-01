@@ -38,6 +38,7 @@ public class ZooKeeperDistributedLock implements Lock<InterProcessMutex>, Initia
 
     @Override
     public boolean unlock(InterProcessMutex lock, LockProperties lockProperties) {
+        Assert.notNull(lock, "lock can't be null");
         try {
             lock.release();
         } catch (Exception e) {
