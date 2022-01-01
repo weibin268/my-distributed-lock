@@ -9,15 +9,18 @@ import java.util.concurrent.TimeUnit;
 public class DistributedLockUtilsTest extends MyDistributedLockTestApplicationTest {
 
     @Test
-    public void test() throws InterruptedException {
-        DistributedLockUtils.lock("test");
+    public void lock() throws InterruptedException {
+        Object lock = DistributedLockUtils.lock("test");
+        TimeUnit.SECONDS.sleep(6);
+        DistributedLockUtils.unlock(lock);
         TimeUnit.SECONDS.sleep(60);
     }
 
     @Test
-    public void test2() throws InterruptedException {
-        Object test = DistributedLockUtils.lock("test");
-        System.out.println(test);
+    public void callBack() {
+        DistributedLockUtils.callBack("test", () -> {
+            System.out.println("done!!");
+        });
     }
 
 }
