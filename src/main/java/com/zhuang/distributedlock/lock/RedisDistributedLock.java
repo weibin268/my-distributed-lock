@@ -80,8 +80,8 @@ public class RedisDistributedLock implements Lock<String>, InitializingBean {
         }
     }
 
-    public boolean unlock(String lockKey, LockProperties lockProperties) {
-        final String key = getLockKey(lockKey, lockProperties);
+    public boolean unlock(String lock, LockProperties lockProperties) {
+        final String key = getLockKey(lock, lockProperties);
         List<String> keyList = new ArrayList<String>();
         keyList.add(key);
         keyList.add(threadKeyId.get());
