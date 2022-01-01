@@ -47,6 +47,7 @@ public class AutoConfiguration {
         return CuratorFrameworkFactory.builder()
                 .connectString(lockProperties.getZooKeeper().getServerLists())
                 .namespace(lockProperties.getLockPre())
+                .sessionTimeoutMs(Long.valueOf(lockProperties.getExpiredTime()).intValue())
                 .retryPolicy(retryPolicy)
                 .build();
     }
