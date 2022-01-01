@@ -56,18 +56,18 @@ public class RedisDistributedLock implements Lock<String>, InitializingBean {
         keyList.add(key);
         keyList.add(threadKeyId.get());
         int lockTryCount = 0;//获取锁次数
-        log.debug("加锁成功，lockKey:{},准备执行业务操作", key);
+        log.debug("加锁成功，lockKey:{},准备执行业务操作", lockKey);
         while (true) {
             if (lockProperties.getRetryCount() > 0 && lockTryCount > lockProperties.getRetryCount()) {
                 //加锁失败超过设定重试次数，抛出异常表示加锁失败
                 throw new RuntimeException("access to distributed lockKey more than retries：" + lockProperties.getRetryCount());
             }
             if (lockTryCount > 0) {
-                log.debug("重试获取锁:{}操作:{}次", key, lockTryCount);
+                log.debug("重试获取锁:{}操作:{}次", lockKey, lockTryCount);
             }
             if (redisTemplate.execute(lockScript, keyList, String.valueOf(lockProperties.getExpiredTime())) > 0) {
                 //返回结果大于0，表示加锁成功
-                log.debug("加锁成功，lockKey:{},准备执行业务操作", key);
+                log.debug("加锁成功，lockKey:{},准备执行业务操作", lockKey);
                 return lockKey;
             } else {
                 try {
@@ -87,7 +87,7 @@ public class RedisDistributedLock implements Lock<String>, InitializingBean {
         keyList.add(key);
         keyList.add(threadKeyId.get());
         redisTemplate.execute(unlockScript, keyList);
-        log.debug("成功释放锁，lockKey:{}", key);
+        log.debug("成功释放锁，lockKey:{}", lock);
         return true;
     }
 
