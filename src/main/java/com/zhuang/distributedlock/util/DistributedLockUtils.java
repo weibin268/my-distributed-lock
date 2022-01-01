@@ -39,31 +39,19 @@ public class DistributedLockUtils {
         return _this.lockManager.callBack(lockKey, callBack);
     }
 
-
     /**
      * @param lockKey 锁的key
-     * @return
+     * @return 锁
      */
     public static Object lock(String lockKey) {
-        LockProperties lockConfig = new LockProperties();
-        BeanUtils.copyProperties(_this.lockProperties, lockConfig);
-        return _this.lock(lockKey, lockConfig);
+        return _this.lock.lock(lockKey, _this.lockProperties);
     }
 
     /**
-     * @param lockKey     锁的key
-     * @param expiredTime 锁的过去时间，单位：毫秒
-     * @return
+     * @param lock 锁
+     * @return 结果
      */
-    public static Object lock(String lockKey, long expiredTime) {
-        LockProperties lockConfig = new LockProperties();
-        BeanUtils.copyProperties(_this.lockProperties, lockConfig);
-        lockConfig.setExpiredTime(expiredTime);
-        return _this.lock(lockKey, lockConfig);
+    public static boolean unlock(Object lock) {
+        return _this.lock.unlock(lock, _this.lockProperties);
     }
-
-    public static Object lock(String lockKey, LockProperties lockConfig) {
-        return _this.lock.lock(lockKey, lockConfig);
-    }
-
 }
