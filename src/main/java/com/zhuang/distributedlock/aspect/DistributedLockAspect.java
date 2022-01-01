@@ -66,13 +66,16 @@ public class DistributedLockAspect {
             String methodName = method.getName();
             key = className + ":" + methodName;
         }
+        Object lock = null;
         try {
-            String lockKey = distributeLock.lock(key, lockProp);
+            lock = distributeLock.lock(key, lockProp);
             Object object = proceedingJoinPoint.proceed();
-            logger.debug("加锁业务执行成功，lockKey:{}，准备释放锁", lockKey);
+            logger.debug("加锁业务执行成功，lockKey:{}，准备释放锁", key);
             return object;
         } finally {
-            distributeLock.unlock(key, lockProp);
+            if (lock != null) {
+                distributeLock.unlock(lock, lockProp);
+            }
         }
     }
 

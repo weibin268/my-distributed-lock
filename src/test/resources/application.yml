@@ -1,0 +1,10 @@
+# server
+server:
+  port: 8081
+  tomcat:
+    uri-encoding: UTF-8
+# distributed-lock
+my:
+  distributed-lock:
+    lock-type: "zookeeper"
+

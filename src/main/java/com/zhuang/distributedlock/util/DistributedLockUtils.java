@@ -5,6 +5,7 @@ import com.zhuang.distributedlock.lock.Lock;
 import com.zhuang.distributedlock.manager.LockCallBack;
 import com.zhuang.distributedlock.manager.LockManager;
 import com.zhuang.distributedlock.manager.ReturnCallBack;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,8 @@ public class DistributedLockUtils {
     private LockManager lockManager;
     @Autowired
     private Lock lock;
+    @Autowired
+    private LockProperties lockProperties;
 
     @PostConstruct
     public void init() {
@@ -36,19 +39,31 @@ public class DistributedLockUtils {
         return _this.lockManager.callBack(lockKey, callBack);
     }
 
+
     /**
-     *
-     * @param lockKey   锁的key
+     * @param lockKey 锁的key
+     * @return
+     */
+    public static Object lock(String lockKey) {
+        LockProperties lockConfig = new LockProperties();
+        BeanUtils.copyProperties(_this.lockProperties, lockConfig);
+        return _this.lock(lockKey, lockConfig);
+    }
+
+    /**
+     * @param lockKey     锁的key
      * @param expiredTime 锁的过去时间，单位：毫秒
      * @return
      */
-    public String lock(String lockKey, long expiredTime) {
+    public static Object lock(String lockKey, long expiredTime) {
         LockProperties lockConfig = new LockProperties();
+        BeanUtils.copyProperties(_this.lockProperties, lockConfig);
         lockConfig.setExpiredTime(expiredTime);
-        return lock(lockKey, lockConfig);
+        return _this.lock(lockKey, lockConfig);
     }
 
-    public String lock(String lockKey, LockProperties lockConfig) {
+    public static Object lock(String lockKey, LockProperties lockConfig) {
         return _this.lock.lock(lockKey, lockConfig);
     }
+
 }

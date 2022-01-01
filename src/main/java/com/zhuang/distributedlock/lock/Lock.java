@@ -3,9 +3,9 @@ package com.zhuang.distributedlock.lock;
 
 import com.zhuang.distributedlock.config.LockProperties;
 
-public interface Lock {
+public interface Lock<T> {
 
-    String lock(String lock, LockProperties lockProperties);
+    T lock(String lockKey, LockProperties lockProperties);
 
-    String unlock(String lock, LockProperties lockProperties);
+    boolean unlock(T lock, LockProperties lockProperties);
 }
