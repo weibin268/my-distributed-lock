@@ -68,7 +68,7 @@ public class RedisDistributedLock implements Lock<String>, InitializingBean {
             if (redisTemplate.execute(lockScript, keyList, String.valueOf(lockProperties.getExpiredTime())) > 0) {
                 //返回结果大于0，表示加锁成功
                 log.debug("加锁成功，lockKey:{},准备执行业务操作", key);
-                return key;
+                return lockKey;
             } else {
                 try {
                     Thread.sleep(lockProperties.getRetryInterval());
@@ -80,13 +80,13 @@ public class RedisDistributedLock implements Lock<String>, InitializingBean {
         }
     }
 
-    public boolean unlock(String lock, LockProperties lockProperties) {
-        final String lockKey = getLockKey(lock, lockProperties);
+    public boolean unlock(String lockKey, LockProperties lockProperties) {
+        final String key = getLockKey(lockKey, lockProperties);
         List<String> keyList = new ArrayList<String>();
-        keyList.add(lockKey);
+        keyList.add(key);
         keyList.add(threadKeyId.get());
         redisTemplate.execute(unlockScript, keyList);
-        log.debug("成功释放锁，lockKey:{}", lockKey);
+        log.debug("成功释放锁，lockKey:{}", key);
         return true;
     }
 
