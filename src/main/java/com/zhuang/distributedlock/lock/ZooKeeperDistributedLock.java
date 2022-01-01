@@ -20,7 +20,7 @@ public class ZooKeeperDistributedLock implements Lock<InterProcessMutex>, Initia
 
     @Override
     public InterProcessMutex lock(String lockKey, LockProperties lockProperties) {
-        Assert.notNull(lockKey, "lockKey must not be null! ");
+        Assert.notNull(lockKey, "lockKey can't be null");
         if (!lockKey.startsWith("/")) {
             lockKey = "/" + lockKey;
         }
