@@ -39,6 +39,19 @@
             <artifactId>my-distributed-lock</artifactId>
             <version>1.2.0</version>
         </dependency>
+        <!--begin db-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.40</version>
+            <optional>true</optional>
+        </dependency>
+        <!--end db-->
     </dependencies>
 
     <build>

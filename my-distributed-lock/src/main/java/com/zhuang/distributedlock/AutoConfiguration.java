@@ -9,6 +9,7 @@ import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @Configurable
 @ComponentScan
+@MapperScan("com.zhuang.distributedlock.mapper")
 public class AutoConfiguration {
     //此配置不可删除需要保留，否则集成到其它工程中，不会扫描spring的bean
 

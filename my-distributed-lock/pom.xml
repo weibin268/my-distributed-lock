@@ -98,6 +98,20 @@
             <version>5.2.0</version>
         </dependency>
         <!--end zookeeper-->
+        <!--begin db-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>3.4.1</version>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.40</version>
+            <optional>true</optional>
+        </dependency>
+        <!--end db-->
     </dependencies>
 
     <dependencyManagement>

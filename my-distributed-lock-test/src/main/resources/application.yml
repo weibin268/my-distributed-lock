@@ -1,10 +1,9 @@
 # server
 server:
-  port: 8081
+  port: 8888
   tomcat:
     uri-encoding: UTF-8
-# distributed-job
+# distributed-lock
 my:
-  distributed-job:
-    zoo-keeper:
-      server-lists: "192.168.0.200:2181"
+  distributed-lock:
+    lock-type: "database"
