@@ -10,8 +10,10 @@ public class DistributedLockUtilsTest extends MyDistributedLockTestApplicationTe
 
     @Test
     public void lock() throws InterruptedException {
+        System.out.println("begin lock");
         Object lock = DistributedLockUtils.lock("test");
         TimeUnit.SECONDS.sleep(15);
+        System.out.println("begin unlock");
         DistributedLockUtils.unlock(lock);
         TimeUnit.SECONDS.sleep(60);
     }
