@@ -43,9 +43,12 @@ public class SysDistributedLockService extends ServiceImpl<SysDistributedLockMap
     }
 
     public boolean unlock(String lockKey) {
+        Date now = new Date();
         return update(new LambdaUpdateWrapper<SysDistributedLock>()
                 .eq(SysDistributedLock::getLockKey, lockKey)
                 .set(SysDistributedLock::getLockStatus, LockStatus.RELEASED.getValue())
+                .set(SysDistributedLock::getBeginTime, now)
+                .set(SysDistributedLock::getEndTime, now)
         );
     }
 }
