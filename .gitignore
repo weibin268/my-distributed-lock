@@ -1,6 +1,5 @@
 HELP.md
-my-distributed-lock/target/
-!.mvn/wrapper/maven-wrapper.jar
+target
 !**/src/main/**
 !**/src/test/**
 

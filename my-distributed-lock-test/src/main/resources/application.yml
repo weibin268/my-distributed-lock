@@ -1,9 +1,0 @@
-# server
-server:
-  port: 8888
-  tomcat:
-    uri-encoding: UTF-8
-# distributed-lock
-my:
-  distributed-lock:
-    lock-type: "database"
