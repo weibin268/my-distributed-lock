@@ -32,11 +32,19 @@ public class DistributedLockUtils {
     }
 
     public static void callBack(String lockKey, LockCallBack callBack) {
-        _this.lockManager.callBack(lockKey, callBack);
+        _this.lockManager.callBack(lockKey, _this.lockProperties, callBack);
+    }
+
+    public static void callBack(String lockKey, LockProperties lockProperties, LockCallBack callBack) {
+        _this.lockManager.callBack(lockKey, lockProperties, callBack);
     }
 
     public static <T> T callBack(String lockKey, ReturnCallBack<T> callBack) {
-        return _this.lockManager.callBack(lockKey, callBack);
+        return _this.lockManager.callBack(lockKey, _this.lockProperties, callBack);
+    }
+
+    public static <T> T callBack(String lockKey, LockProperties lockProperties, ReturnCallBack<T> callBack) {
+        return _this.lockManager.callBack(lockKey, lockProperties, callBack);
     }
 
     /**
@@ -44,7 +52,11 @@ public class DistributedLockUtils {
      * @return 锁
      */
     public static Object lock(String lockKey) {
-        return _this.lock.lock(lockKey, _this.lockProperties);
+        return lock(lockKey, _this.lockProperties);
+    }
+
+    public static Object lock(String lockKey, LockProperties lockProperties) {
+        return _this.lock.lock(lockKey, lockProperties);
     }
 
     /**
@@ -52,6 +64,10 @@ public class DistributedLockUtils {
      * @return 结果
      */
     public static boolean unlock(Object lock) {
-        return _this.lock.unlock(lock, _this.lockProperties);
+        return unlock(lock, _this.lockProperties);
+    }
+
+    public static boolean unlock(Object lock, LockProperties lockProperties) {
+        return _this.lock.unlock(lock, lockProperties);
     }
 }

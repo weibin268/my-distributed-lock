@@ -16,13 +16,10 @@ import org.springframework.util.Assert;
 public class DefaultLockManager implements LockManager {
 
     private Logger logger = LoggerFactory.getLogger(DefaultLockManager.class);
-
     @Autowired
     private Lock distributeLock;
-    @Autowired
-    private LockProperties lockProperties;
 
-    public void callBack(String lockKey, LockCallBack callBack) {
+    public void callBack(String lockKey, LockProperties lockProperties, LockCallBack callBack) {
         Assert.notNull(lockKey, "lockKey can't not be null");
         Assert.notNull(callBack, "callBack can't not be null");
         Object lock = null;
@@ -40,7 +37,7 @@ public class DefaultLockManager implements LockManager {
         }
     }
 
-    public <T> T callBack(String lockKey, ReturnCallBack<T> callBack) {
+    public <T> T callBack(String lockKey, LockProperties lockProperties, ReturnCallBack<T> callBack) {
         Assert.notNull(lockKey, "lockKey can't not be null");
         Assert.notNull(callBack, "callBack can't not be null");
         Object lock = null;
