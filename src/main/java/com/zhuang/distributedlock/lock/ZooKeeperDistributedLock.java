@@ -27,10 +27,13 @@ public class ZooKeeperDistributedLock implements Lock<InterProcessMutex>, Initia
         }
         InterProcessMutex lock = new InterProcessMutex(client, lockKey);
         try {
-            boolean acquireResult = lock.acquire(lockProperties.getAcquireTimeout(), TimeUnit.MILLISECONDS);
+            long time = lockProperties.getRetryCount() * lockProperties.getRetryInterval();
+            boolean acquireResult = lock.acquire(time, TimeUnit.MILLISECONDS);
             if (!acquireResult) {
                 throw new LockTimeoutException("ZkDistributedLock.lock acquire lock timeout!");
             }
+        } catch (LockTimeoutException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("ZkDistributedLock.lock fail!", e);
         }

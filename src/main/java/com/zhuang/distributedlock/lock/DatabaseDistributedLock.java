@@ -8,8 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.concurrent.TimeUnit;
-
 @Slf4j
 public class DatabaseDistributedLock implements Lock<String>, InitializingBean {
 
@@ -28,6 +26,8 @@ public class DatabaseDistributedLock implements Lock<String>, InitializingBean {
                 Thread.sleep(lockProperties.getRetryInterval());
             }
             throw new LockTimeoutException("DatabaseDistributedLock.lock acquire lock timeout!");
+        } catch (LockTimeoutException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException("DatabaseDistributedLock.lock fail!", e);
         }
