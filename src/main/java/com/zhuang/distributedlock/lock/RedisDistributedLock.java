@@ -2,6 +2,7 @@ package com.zhuang.distributedlock.lock;
 
 
 import com.zhuang.distributedlock.config.LockProperties;
+import com.zhuang.distributedlock.exception.LockTimeoutException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,7 @@ public class RedisDistributedLock implements Lock<String>, InitializingBean {
         while (true) {
             if (lockProperties.getRetryCount() > 0 && lockTryCount > lockProperties.getRetryCount()) {
                 //加锁失败超过设定重试次数，抛出异常表示加锁失败
-                throw new RuntimeException("access to distributed lockKey more than retries：" + lockProperties.getRetryCount());
+                throw new LockTimeoutException("access to distributed lockKey more than retries：" + lockProperties.getRetryCount());
             }
             if (lockTryCount > 0) {
                 log.debug("重试获取锁:{}操作:{}次", lockKey, lockTryCount);

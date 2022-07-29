@@ -1,6 +1,8 @@
 package com.zhuang.distributedlock.config;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.experimental.Accessors;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,6 +12,7 @@ import static com.zhuang.distributedlock.config.LockProperties.PREFIX;
 @Data
 @Configuration
 @ConfigurationProperties(prefix = PREFIX)
+@Accessors(chain = true)
 public class LockProperties {
 
     public static final String PREFIX = "my.distributed-lock";
@@ -29,4 +32,5 @@ public class LockProperties {
     public static class ZooKeeper {
         private String serverLists = "127.0.0.1:2181";
     }
+
 }

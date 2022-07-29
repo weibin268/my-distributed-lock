@@ -70,4 +70,10 @@ public class DistributedLockUtils {
     public static boolean unlock(Object lock, LockProperties lockProperties) {
         return _this.lock.unlock(lock, lockProperties);
     }
+
+    public static LockProperties newLockProperties() {
+        LockProperties result = new LockProperties();
+        BeanUtils.copyProperties(_this.lockProperties, result);
+        return result;
+    }
 }

@@ -2,6 +2,7 @@ package com.zhuang.distributedlock.lock;
 
 
 import com.zhuang.distributedlock.config.LockProperties;
+import com.zhuang.distributedlock.exception.LockTimeoutException;
 import com.zhuang.distributedlock.service.SysDistributedLockService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
@@ -26,7 +27,7 @@ public class DatabaseDistributedLock implements Lock<String>, InitializingBean {
                 }
                 Thread.sleep(lockProperties.getRetryInterval());
             }
-            throw new RuntimeException("DatabaseDistributedLock.lock acquire lock timeout!");
+            throw new LockTimeoutException("DatabaseDistributedLock.lock acquire lock timeout!");
         } catch (Exception e) {
             throw new RuntimeException("DatabaseDistributedLock.lock fail!", e);
         }

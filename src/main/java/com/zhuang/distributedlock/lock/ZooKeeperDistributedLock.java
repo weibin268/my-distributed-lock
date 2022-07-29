@@ -2,6 +2,7 @@ package com.zhuang.distributedlock.lock;
 
 
 import com.zhuang.distributedlock.config.LockProperties;
+import com.zhuang.distributedlock.exception.LockTimeoutException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
@@ -28,7 +29,7 @@ public class ZooKeeperDistributedLock implements Lock<InterProcessMutex>, Initia
         try {
             boolean acquireResult = lock.acquire(lockProperties.getAcquireTimeout(), TimeUnit.MILLISECONDS);
             if (!acquireResult) {
-                throw new RuntimeException("ZkDistributedLock.lock acquire lock timeout!");
+                throw new LockTimeoutException("ZkDistributedLock.lock acquire lock timeout!");
             }
         } catch (Exception e) {
             throw new RuntimeException("ZkDistributedLock.lock fail!", e);
